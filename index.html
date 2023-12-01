@@ -8,6 +8,8 @@
   </head>
   <body>
     <input type="text" id="datainput" autocomplete="off" class="inputlink" />
+    <br />
+    <br />
     <button onclick="genQr()" class="generate">Generate Qrcode</button>
     <div id="qrcode" style="display: none"></div>
     <br />
@@ -29,14 +31,16 @@
       }
       .generate {
         background-color: green;
+
         color: #ffff;
         width: 120px;
-        height: 30px;
+        height: 40px;
         border-radius: 10px;
         border: none;
       }
       .inputlink {
-        width: 500px;
+        width: 100%;
+        margin-top: 10px;
         height: 30px;
         border-radius: 5px;
         border: 1px solid gray;
@@ -52,8 +56,8 @@
         qrcode_style.style = '';
         new QRCode(qrcode_style, {
           text: datainput,
-          width: 300,
-          height: 300,
+          width: 200,
+          height: 200,
           colorDark: '#333333',
           colorLight: '#FFFF',
           correctLevel: QRCode.CorrectLevel.H,
