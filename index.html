@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR-Code</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  </head>
+  <body>
+    <input type="text" id="datainput" autocomplete="off" class="inputlink" />
+    <button onclick="genQr()" class="generate">Generate Qrcode</button>
+    <div id="qrcode" style="display: none"></div>
+    <br />
+    <br />
+    <a onclick="fsload()" id="load_qrcode" class="btndowload"> Download </a>
+
+    <style>
+      .btndowload {
+        background-color: black;
+        color: #ffff;
+        width: 120px;
+        height: 40px;
+        border-radius: 10px;
+        cursor: pointer; /* Add cursor style to indicate it's clickable */
+        display: inline-block; /* Add display style to make it inline-block */
+        text-align: center; /* Center text within the button */
+        line-height: 40px; /* Center text vertically within the button */
+        text-decoration: none; /* Remove default link underline */
+      }
+      .generate {
+        background-color: green;
+        color: #ffff;
+        width: 120px;
+        height: 30px;
+        border-radius: 10px;
+        border: none;
+      }
+      .inputlink {
+        width: 500px;
+        height: 30px;
+        border-radius: 5px;
+        border: 1px solid gray;
+      }
+    </style>
+
+    <script>
+      let qrcode_style = document.querySelector('#qrcode');
+      function genQr() {
+        fsqrcode(document.getElementById('datainput').value);
+      }
+      function fsqrcode(datainput) {
+        qrcode_style.style = '';
+        new QRCode(qrcode_style, {
+          text: datainput,
+          width: 300,
+          height: 300,
+          colorDark: '#333333',
+          colorLight: '#FFFF',
+          correctLevel: QRCode.CorrectLevel.H,
+        });
+      }
+      function fsload() {
+        let qrcodeimage = qrcode_style.querySelector('img');
+        if (qrcodeimage) {
+          let link = document.createElement('a');
+          link.href = qrcodeimage.src;
+          link.download = 'qr_code.png';
+          link.click();
+        } else {
+          console.error('QR code image not found.');
+        }
+      }
+    </script>
+  </body>
+</html>
